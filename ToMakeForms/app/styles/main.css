@@ -1,0 +1,75 @@
+
+/*网站首页定义*/
+body {
+    font-family: "Hiragino Sans GB","Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";
+    padding-top: 0px;
+    padding-bottom: 70px;
+}
+
+a {
+    cursor: pointer;
+}
+
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+html {
+    font-family: "Hiragino Sans GB","Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";
+}
+
+.btn {
+    font-family: "Hiragino Sans GB","Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";
+}
+
+/*Dialog CSS 定义*/
+.dialog-header-error { background-color: #d2322d; }
+.dialog-header-wait { background-color: #428bca; }
+.dialog-header-notify { background-color: #eeeeee; }
+.dialog-header-confirm { background-color: #333333; }
+.dialog-header-error span, .dialog-header-error h4,
+.dialog-header-wait span, .dialog-header-wait h4,
+.dialog-header-confirm span, .dialog-header-confirm h4 { color: #ffffff; }
+
+.loadmask {
+	display: none;
+	position: fixed;
+	top: 45px;
+	right: 0;
+	bottom: 0;
+	left: 190px;
+	z-index: 1030;
+	background-color: #5E5E5E;
+	opacity: .5;
+}
+
+.loadmaskn {
+	position: fixed;
+	top: 45px;
+	right: 0;
+	bottom: 0;
+	left: 190px;
+	z-index: 1040;
+	display: none;
+	overflow: auto;
+	overflow-y: scroll;
+}
+
+.ui-pg-input {
+	font-size: inherit;
+	width: 24px;
+	height: 20px;
+	line-height: 16px;
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+	text-align: center;
+	padding: 0!important;
+}
+td {
+    min-height: 35px;
+}

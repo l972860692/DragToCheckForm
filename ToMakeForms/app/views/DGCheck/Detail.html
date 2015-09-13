@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+   <!-- <script src="../app/scripts/controllers/DGCheckCtr/DGCheck.js"></script>-->
+</head>
+<body>
+    <div class="page-content" ng-controller="DGChecksDetailCtr">
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="page-header clearfix">
+                    <h1 class="col-sm-7" style="margin: 0">检查单详情</h1>
+                    <button type="button" ng-click="back()" class="btn btn-default btn-xs ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="float: right">
+                        <span class="ui-button-text"><i class="fa fa-reply bigger-110"></i>&nbsp;返回</span>
+                    </button>
+                </div>
+                <table cellpadding="0" cellspacing="0" style="width: 100%" class="table table-bordered editTable">
+                    <tr>
+                        <th align="right">检查单名称：</th>
+                        <td align="left">
+                            <input type="text" ng-model="NewCheckForms.Name" />
+                        </td>
+                        <th align="right">制作人：</th>
+                        <td align="left">
+                            {{NewCheckForms.Users.Name}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th align="right">创建日期：</th>
+                        <td align="left">
+                            {{ NewCheckForms.CreateDate|date:'yyyy-MM-dd HH:mm:ss'}}
+                        </td>
+                        <th align="right">最后使用日期：</th>
+                        <td align="left">
+                            {{ NewCheckForms.TouchDate|date:'yyyy-MM-dd HH:mm:ss'}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="widget-box transparent">
+                    <div class="widget-header">
+                        <span>选择项</span><span ng-show="NewCheckForms.Status==1" style="color:#c12e2a">(*已使用不可更改*)</span>
+                    </div>
+                    <div class="widget-body">
+                        <div ng-repeat="big in bigArray track by $index" ><span ng-hide="true">{{big.nowBigIndex=$index}}</span>
+                            <table cellpadding=" 0" cellspacing="0" style="width: 100%; margin-bottom: 0px; margin-top: 0px" class="table table-bordered table-hover table-striped indexTable">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center; width: 5%; color: #82af6f;">
+                                            <span style="margin-top: auto">{{big.BigCatName}}</span><div style="float: right;">
+                                                <span ng-show="!$first" style="cursor: pointer" class="glyphicon glyphicon-chevron-up" ng-click="oncatNameClickUp(1,$index)"></span>
+                                                <span ng-show="!$last" style="cursor: pointer" class="glyphicon glyphicon-chevron-down" ng-click="oncatNameClickDo(1,$index)"></span>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                            <div ng-repeat="cat in big.ListCat track by $index" ><span ng-hide="true">{{cat.CatIndex=calucatlocation(big.nowBigIndex,$index)}}</span>
+                                <table cellpadding="0" cellspacing="0" style="width: 100%; margin-bottom: 0px; margin-top: 0px" class="table table-bordered table-hover table-striped indexTable">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align: left;">
+                                                {{cat.CatIndex|showcatindex}}：{{cat.CatName}}
+                                                <span ng-hide="true">{{cat.nowCatIndex=$index}}</span>
+                                                <div style="float: right;">
+                                                    <span ng-show="!$first" style="cursor: pointer" class="glyphicon glyphicon-chevron-up" ng-click="oncatNameClickUp(2,big.nowBigIndex,$index)"></span>
+                                                    <span ng-show="!$last" style="cursor: pointer" class="glyphicon glyphicon-chevron-down" ng-click="oncatNameClickDo(2,big.nowBigIndex,$index)"></span>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                                <table cellpadding="0" cellspacing="0" style="width: 100%; margin-bottom: 0px; margin-top: 0px" class="table table-bordered table-hover table-striped indexTable">
+
+                                    <tbody>
+                                        <tr ng-repeat="y in  cat.ListContent track by $index " ng-init="ContentIndex=$index+1">
+                                            <td ng-hide="storeBackIndex(big.nowBigIndex||cat.nowCatIndex||$index,y.Id)" style="text-align: left; width: 35%;">{{cat.CatIndex}}.{{ContentIndex}}：{{y.ContentName}}</td>
+                                            <td style="text-align: left; width: 65%;">
+                                                <div ng-repeat="yy in y.CheckPointss track by $index" ng-init="CPIndex=$index">{{cat.CatIndex}}.{{ContentIndex}}.{{CPIndex+1}}：{{yy.Point}}</div>
+                                                <div style="float: right;">
+                                                    <span ng-show="!$first" style="cursor: pointer" class="glyphicon glyphicon-chevron-up" ng-click="oncatNameClickUp(3,big.nowBigIndex,cat.nowCatIndex,$index)"></span>
+                                                    <span style="cursor: pointer" class="glyphicon glyphicon-remove" ng-click="oncatNameClickRe(3,big.nowBigIndex,cat.nowCatIndex,$index)"></span>
+                                                    <span ng-show="!$last" style="cursor: pointer" class="glyphicon glyphicon-chevron-down" ng-click="oncatNameClickDo(3,big.nowBigIndex,cat.nowCatIndex,$index)"></span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12" style="text-align: center;">
+                <button ng-disabled="NewCheckForms.Status==1" class="btn btn-info" ng-click="backSave()">
+                    <i class="fa fa-check bigger-110"></i>
+                    保存
+                </button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

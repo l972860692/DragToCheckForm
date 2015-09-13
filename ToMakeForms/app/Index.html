@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html ng-app="appPage">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>系统</title>
+    <link href="package/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="package/fontawesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="styles/ace.min.css" rel="stylesheet" />
+    <link href="styles/main.css" rel="stylesheet" />
+
+
+
+    <!-- 外部 JS 包引用 -->
+    <script src="package/jquery-1.9.1.js"></script>
+    <script src="package/bootstrap/dist/js/bootstrap.js"></script>
+
+
+    <script src="package/ng/angular.js"></script>
+    <script src="package/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="package/ng/angular-resource.js"></script>
+    <script src="package/ng/angular-route.js"></script>
+
+    <script src="package/ng/ngSelectTree.js"></script>
+
+    <!--angular-dragdrop-->
+
+    <script src="package/DD/jquery-ui/jquery-ui.js"></script>
+    <script src="package/DD/angular-dragdrop/src/angular-dragdrop.js"></script>
+
+    <script src="scripts/index.js"></script>
+
+    <script src="scripts/controllers/DGCheckCtr/DGCheck.js"></script>
+    <script src="scripts/controllers/DGCheckCtr/DGCheckContent.js"></script>
+    <script src="scripts/controllers/DGCheckCtr/DGCheckRlt.js"></script>
+
+    <style>
+        .thumbnail {
+            height: 280px !important;
+        }
+
+        .abc {
+            disabled: "disabled";
+        }
+    </style>
+
+</head>
+<body >
+
+
+    <div class="page-content" ng-controller="DGChecksAddCtr">
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="operate panel panel-default">
+                    <div class="panel-body">
+                        <div class="pull-left">
+                            <span>输入检查单名称：</span><input type="text" ng-model="newFormName" placeholder="请输入检查单名称" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="widget-box transparent">
+                    <div class="widget-header">
+                        <span>选择项</span>
+                    </div>
+                    <div class="widget-body">
+                        <div class="panel panel-success" data-drop="true" ng-model='docxs' jqyoui-droppable="{multiple:true,onDrop:'dropCallback'}">
+                            <div ng-repeat="big in bigArray track by $index">
+                                <span ng-hide="true">{{big.nowBigIndex=$index}}</span>
+                                <table cellpadding=" 0" cellspacing="0" style="width: 100%; margin-bottom: 0px; margin-top: 0px" class="table table-bordered table-hover table-striped indexTable">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align: center; width: 5%; color: #82af6f;">
+                                                <span style="margin-top: auto">{{big.BigCatName}}</span><div style="float: right;">
+                                                    <span ng-show="!$first" style="cursor: pointer" class="glyphicon glyphicon-chevron-up" ng-click="oncatNameClickUp(1,$index)"></span>
+                                                    <span ng-show="!$last" style="cursor: pointer" class="glyphicon glyphicon-chevron-down" ng-click="oncatNameClickDo(1,$index)"></span>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                                <div ng-repeat="cat in big.ListCat track by $index">
+                                    <span ng-hide="true">{{cat.CatIndex=calucatlocation(big.nowBigIndex,$index)}}</span>
+                                    <table cellpadding="0" cellspacing="0" style="width: 100%; margin-bottom: 0px; margin-top: 0px" class="table table-bordered table-hover table-striped indexTable">
+                                        <thead>
+                                            <tr>
+                                                <th style="text-align: left;">
+                                                    {{cat.CatIndex|showcatindex}}：{{cat.CatName}}
+                                                    <span ng-hide="true">{{cat.nowCatIndex=$index}}</span>
+                                                    <div style="float: right;">
+                                                        <span ng-show="!$first" style="cursor: pointer" class="glyphicon glyphicon-chevron-up" ng-click="oncatNameClickUp(2,big.nowBigIndex,$index)"></span>
+                                                        <span ng-show="!$last" style="cursor: pointer" class="glyphicon glyphicon-chevron-down" ng-click="oncatNameClickDo(2,big.nowBigIndex,$index)"></span>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                    <table cellpadding="0" cellspacing="0" style="width: 100%; margin-bottom: 0px; margin-top: 0px" class="table table-bordered table-hover table-striped indexTable">
+
+                                        <tbody>
+                                            <tr ng-repeat="y in  cat.ListContent track by $index " ng-init="ContentIndex=$index+1">
+                                                <td style="text-align: left; width: 35%;">{{cat.CatIndex}}.{{ContentIndex}}：{{y.ContentName}}</td>
+                                                <td style="text-align: left; width: 65%;">
+                                                    <div ng-repeat="yy in y.CheckPointss track by $index" ng-init="CPIndex=$index">{{cat.CatIndex}}.{{ContentIndex}}.{{CPIndex+1}}：{{yy.Point}}</div>
+                                                    <div style="float: right;">
+                                                        <span ng-show="!$first" style="cursor: pointer" class="glyphicon glyphicon-chevron-up" ng-click="oncatNameClickUp(3,big.nowBigIndex,cat.nowCatIndex,$index)"></span>
+                                                        <span style="cursor: pointer" class="glyphicon glyphicon-remove" ng-click="oncatNameClickRe(3,big.nowBigIndex,cat.nowCatIndex,$index)"></span>
+                                                        <span ng-show="!$last" style="cursor: pointer" class="glyphicon glyphicon-chevron-down" ng-click="oncatNameClickDo(3,big.nowBigIndex,cat.nowCatIndex,$index)"></span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div style="height: 100px" ng-hide="hideCCS()">拖到这里</div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-4">
+                <div class="widget-box transparent">
+                    <div class="widget-header">
+
+                        <select ng-model="NowCatId" ng-change="selectNCC()">
+                            <option value="" disabled selected>==请选择==</option>
+                            <option ng-value="r.Id" ng-disabled="r.haschildren" ng-repeat="r in AllCats">{{r.Name}}</option>
+                        </select>
+                    </div>
+                    <div class="widget-body">
+                        <div class="panel panel-success" data-drop="false" ng-model='docs' ">
+                       <div style=" height 100px" ng-hide="hideCC()">请选择检查项类别</div>
+                        <!--  <div class="panel panel-default" ng-repeat="item in liste" ng-show="item.title" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="liste" jqyoui-draggable="{index: {{$index}},animate:true,onStart:'startCallback(item, $index)'}">{{liste[$index].title}}</div>-->
+                        <accordion close-others="false">
+
+                            <accordion-group ng-repeat="doc in docs" ng-model="docs" data-jqyoui-options="{revert: 'invalid'}" data-drag="true" jqyoui-draggable="{index: {{$index}}, placeholder:'true',animate:true}">
+                                <accordion-heading>
+                                    {{doc.ContentName}}
+                                </accordion-heading>
+                                <div ng-repeat="x in doc.CheckPointss  track by $index ">
+                                    <pre class="ng-binding">{{x.Point}}</pre>
+                                </div>
+                            </accordion-group>
+                        </accordion>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-sm-12" style="text-align: center;">
+            <button class="btn btn-info" ng-click="checksubmit()">
+                <i class="fa fa-check bigger-110"></i>
+                提交
+
+            </button>
+        </div>
+    </div>
+    </div>
+</body>
+</html>

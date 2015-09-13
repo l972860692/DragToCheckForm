@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>  
+
+
+</head>
+
+    <body>
+         <div class="page-header clearfix">
+        <h1 class="col-sm-8" style="margin: 0">检查单模板管理</h1>
+              
+                <a style="cursor: pointer;float: right" href="#/AddCheck" class="btn btn-success">新增检查单模板</a>
+     
+
+    </div>
+                            <div class="row" style="margin-left: 20px">
+            <table cellpadding="0" cellspacing="0">
+                <tr>
+                  
+                    <td>
+         <div  class="input-group">
+                <input class="form-control" type="text" name="keyword" ng-model="keyword" placeholder="关键字" />
+                <div class="input-group-btn">
+                    <a class="btn btn-sm btn-info" ng-click="submit_search(keyword);"><i class="fa fa-search"></i></a>                 
+                </div>
+            </div>
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+    <div style="margin-top: 20px;" class="dataTables_wrapper"  ng-controller="DGCheckCtrl">
+        <table class="table table-bordered">
+            <tr>
+                <th style="text-align: center">序号</th>
+                <th style="text-align: center">检查单名称</th>
+                <th style="text-align: center">创建时间</th>
+                <th style="text-align: center">最后使用时间</th>
+                <th style="text-align: center">状态</th>
+                <th style="text-align: center">创建人</th>
+                <th style="text-align: center">操作</th>
+            </tr>
+            <tr ng-repeat="data in dataList">
+               <td style="text-align: center"><div ng-show="data.Id!='0'">{{10*(currentPage-1)+$index+1}}</div></td>
+                <td style="text-align: center">{{data.Name}}</td>
+                <td style="text-align: center">{{data.CreateDate|date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                <td style="text-align: center">{{data.TouchDate|date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                <td style="text-align: center"><div ng-show="data.Id!='0'">{{data.Status|showstring}}</div></td>
+                <td style="text-align: center">{{data.UserName}}</td>              
+                <td style="text-align: center">
+                    <div ng-show="data.Id!='0'">
+                    <a style="cursor: pointer" ng-show="{{ngShowDetail=true}}" ng-click="DetailDGCheck(data.id)">详情</a>
+                    |<a ng-click="DeleteDGCheck(data.id)" style="cursor: pointer"ng-show="{{ngShowDelete=true}}">删除</a>
+                </div>
+                        </td>
+            </tr>            
+
+        </table>
+       <!-- <pagefootdir></pagefootdir>-->
+        <page-change ng-show="ShowPager"></page-change>
+    </div>
+        
+    </body>
+   
+</html>

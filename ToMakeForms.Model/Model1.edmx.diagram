@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0665ccb5e79748b9bc8b24bf1652b469" Name="Diagram1">
+        <EntityTypeShape EntityType="DSMSModel.CheckContentCat" Width="1.5" PointX="11.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DSMSModel.CheckContents" Width="1.5" PointX="14" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DSMSModel.CheckCos" Width="1.5" PointX="7.5" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DSMSModel.CheckForms" Width="1.5" PointX="9.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DSMSModel.Checkings" Width="1.5" PointX="7.5" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DSMSModel.CheckPoints" Width="1.5" PointX="16.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DSMSModel.CheckRefRules" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DSMSModel.CheckResults" Width="1.5" PointX="10.5" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DSMSModel.Citys" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DSMSModel.Companys" Width="1.5" PointX="5.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DSMSModel.Departments" Width="1.5" PointX="5.25" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DSMSModel.Modules" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DSMSModel.Provinces" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DSMSModel.RefRuleDocs" Width="1.5" PointX="0.75" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DSMSModel.UserRoles" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DSMSModel.Users" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="DSMSModel.FK_Cat" ManuallyRouted="false" />
+        <AssociationConnector Association="DSMSModel.FK_CheckPointCheckContent" ManuallyRouted="false" />
+        <AssociationConnector Association="DSMSModel.FK_CheckCompanyId" ManuallyRouted="false" />
+        <AssociationConnector Association="DSMSModel.FK_CheckFormCheckResult" ManuallyRouted="false" />
+        <AssociationConnector Association="DSMSModel.FK_CheckFormUser" ManuallyRouted="false" />
+        <AssociationConnector Association="DSMSModel.FK_Checkings_Companys" ManuallyRouted="false" />
+        <AssociationConnector Association="DSMSModel.FK_RuleDoc" ManuallyRouted="false" />
+        <AssociationConnector Association="DSMSModel.FK_CheckResultUser" ManuallyRouted="false" />
+        <AssociationConnector Association="DSMSModel.FK_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="DSMSModel.FK_CityCompany" ManuallyRouted="false" />
+        <AssociationConnector Association="DSMSModel.FK_CityProvince" ManuallyRouted="false" />
+        <AssociationConnector Association="DSMSModel.FK_ProvinceCompany" ManuallyRouted="false" />
+        <AssociationConnector Association="DSMSModel.FK_UserCompany" ManuallyRouted="false" />
+        <AssociationConnector Association="DSMSModel.FK_DepartmentUser" ManuallyRouted="false" />
+        <AssociationConnector Association="DSMSModel.FK_ParentDept" ManuallyRouted="false" />
+        <AssociationConnector Association="DSMSModel.FK_UserRoleUser" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
